@@ -83,7 +83,7 @@ class PortScaner(object):
         except Exception as e:
             print("%s:%s"%(domain, e))
 
-def main():
+def spider():
     print('请输入URL（用单引号包含）：', end='')
     root = str(input())
     root = root.replace('\'', '')
@@ -91,6 +91,7 @@ def main():
     #spider
     wgd = SpiderMain(root, threadNum)
     wgd.craw()
+def portscan():
     #portscan
     start_time = time.time()  # 脚本开始执行的时间
     port_scner = PortScaner()
@@ -115,6 +116,11 @@ def main():
         thread.join()
     end_time = time.time()  # 脚本结束执行的时间
     print("[end time] %3ss" % (end_time - start_time,))
-
+def default():
+    print('无此功能，请重新运行脚本！')
+switch = {'1' : spider,
+          '2' : portscan}
 if __name__ == '__main__':
-    main()
+    print('请输入数字(1 - 爬取网站目录 , 2 - 扫描对应ip开启端口)',end='\n')
+    num=str(input())
+    switch.get(num,default)()
