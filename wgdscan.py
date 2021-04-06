@@ -11,6 +11,7 @@ import time
 import socket
 import queue
 import threading
+import os
 
 class PortScaner(object):
     '''
@@ -116,11 +117,20 @@ def portscan():
         thread.join()
     end_time = time.time()  # 脚本结束执行的时间
     print("[end time] %3ss" % (end_time - start_time,))
+def xray(ip):
+    exp=(("xray_windows_amd64.exe webscan --basic-crawler {0}").format(ip))
+    print('\nxray starting----------------------')
+    os.system(exp)
+def xray_start():
+    with open('ip.txt','r') as file: list = [www.strip() for www in file.readlines()]
+    for ip in list: xray(ip)
+
 def default():
     print('无此功能，请重新运行脚本！')
 switch = {'1' : spider,
-          '2' : portscan}
+          '2' : portscan,
+          '3' : xray_start}
 if __name__ == '__main__':
-    print('请输入数字(1 - 爬取网站目录 , 2 - 扫描对应ip开启端口)',end='\n')
+    print('请输入数字 \n1 - 简单目录爬取 , \n2 - 扫描开放端口 ， \n3 - 调用xray扫描(请先在ip.txt中写入url)',end='\n')
     num=str(input())
     switch.get(num,default)()
