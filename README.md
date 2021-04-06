@@ -32,4 +32,5 @@ add some updated things
 ## 更新记录
 
 2020.10.7 优化了功能的选择，每次能选择需要的功能来运行
+
 2021.04.6 集成Xray，加入了Python调用Xray扫描的命令
